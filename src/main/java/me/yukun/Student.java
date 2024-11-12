@@ -5,22 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class Student {
 
-  private int id;
-  private String name;
-  private String city;
+  private final int id;
+  private final String name;
+  private final String city;
   private List<Parent> parents;
   private School school;
 
-
-  public void setId(int id) {
+  public Student(int id, String name, String city) {
     this.id = id;
-  }
-
-  public void setName(String name) {
     this.name = name;
-  }
-
-  public void setCity(String city) {
     this.city = city;
   }
 

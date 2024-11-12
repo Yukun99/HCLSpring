@@ -5,9 +5,9 @@
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
   <bean id="student" class="me.yukun.Student">
-    <property name="id" value="3456"/>
-    <property name="name" value="Rahul"/>
-    <property name="city" value="Hyderabad"/>
+    <constructor-arg name="id" value="3456"/>
+    <constructor-arg name="name" value="Rahul"/>
+    <constructor-arg name="city" value="Hyderabad"/>
   </bean>
 
 </beans>
