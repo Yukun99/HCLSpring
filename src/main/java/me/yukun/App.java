@@ -5,9 +5,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
-	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		Student student1 = (Student) context.getBean("student");
-		System.out.println(student1);
-	}
+  public static void main(String[] args) {
+    ApplicationContext context = new ClassPathXmlApplicationContext(
+        "me/yukun/applicationContext.xml");
+    Student student1 = (Student) context.getBean("student");
+    System.out.println(student1);
+  }
 }
