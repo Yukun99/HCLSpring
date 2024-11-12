@@ -2,11 +2,14 @@ package me.yukun;
 
 public class School {
 
-  private final int id;
-  private final String name;
+  private int id;
+  private String name;
 
-  public School(int id, String name) {
+  public void setId(int id) {
     this.id = id;
+  }
+
+  public void setName(String name) {
     this.name = name;
   }
 
