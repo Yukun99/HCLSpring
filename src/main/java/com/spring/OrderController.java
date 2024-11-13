@@ -1,5 +1,6 @@
 package com.spring;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,12 @@ public class OrderController {
 
   @RequestMapping("/get")
   @ResponseBody
-  public List<Customer> getCustomers() {
-    return repository.getCustomers();
+  public List<String> getCustomers() {
+    List<String> result = new ArrayList<>();
+    for (Customer customer : repository.getCustomers()) {
+      result.add(customer.query());
+    }
+    return result;
   }
 
   @RequestMapping("/query/{id}")
