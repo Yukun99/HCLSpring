@@ -1,0 +1,16 @@
+### Simple hello world-esque message
+GET localhost:8081/start
+
+### Gets all customers
+GET localhost:8081/get
+
+### Queries customer with specified id
+GET localhost:8081/query/1
+
+### Deposit money to customer with specified id. Body must be double value.
+POST localhost:8081/deposit/1
+
+### Withdraw money from customer with specified id. Body must be double value.
+POST localhost:8081/withdraw/1
+
+^ queries to try out with the web server in postman or something
