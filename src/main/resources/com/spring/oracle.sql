@@ -13,9 +13,12 @@ CREATE SEQUENCE TRANSACTIONS_SEQ
     START WITH 1
     INCREMENT BY 1
     NOCACHE;
+
+
 DROP TABLE customers;
-DROP TABLE accounts;
 DROP TABLE transactions;
+DROP TABLE accounts;
+
 
 CREATE TABLE accounts
 (
@@ -97,14 +100,14 @@ VALUES (CUSTOMERS_SEQ.nextval, 'Charlie Green', 'charlieg', 'charlie.g@example.c
  */
 -- Insert transactions into Transaction table
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
-VALUES (101, 1, TO_DATE('2024-11-01', 'YYYY-MM-DD'), 200.00, 'Amazon', 'Completed', 'Payment for order #1234');
+VALUES (TRANSACTIONS_SEQ.nextval, 101, TO_DATE('2024-11-01', 'YYYY-MM-DD'), 200.00, 'Amazon', 'Completed', 'Payment for order #1234');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
-VALUES (102, 1, TO_DATE('2024-11-15', 'YYYY-MM-DD'), 500.00, 'Rent Payment', 'Completed', 'Monthly rent for November');
+VALUES (TRANSACTIONS_SEQ.nextval, 101, TO_DATE('2024-11-15', 'YYYY-MM-DD'), 500.00, 'Rent Payment', 'Completed', 'Monthly rent for November');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
-VALUES (103, 2, TO_DATE('2024-11-20', 'YYYY-MM-DD'), 75.00, 'Netflix', 'Completed', 'Monthly subscription fee');
+VALUES (TRANSACTIONS_SEQ.nextval, 102, TO_DATE('2024-11-20', 'YYYY-MM-DD'), 75.00, 'Netflix', 'Completed', 'Monthly subscription fee');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
-VALUES (104, 2, TO_DATE('2024-12-01', 'YYYY-MM-DD'), 1000.00, 'Employer', 'Completed', 'Salary for November');
+VALUES (TRANSACTIONS_SEQ.nextval, 102, TO_DATE('2024-12-01', 'YYYY-MM-DD'), 1000.00, 'Employer', 'Completed', 'Salary for November');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
-VALUES (105, 3, TO_DATE('2024-12-01', 'YYYY-MM-DD'), 150.00, 'Electricity Board', 'Completed', 'Utility bill payment');
+VALUES (TRANSACTIONS_SEQ.nextval, 103, TO_DATE('2024-12-01', 'YYYY-MM-DD'), 150.00, 'Electricity Board', 'Completed', 'Utility bill payment');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
-VALUES (106, 3, TO_DATE('2024-12-02', 'YYYY-MM-DD'), 250.00, 'XYZ Store', 'Pending', 'Purchase of electronics');
+VALUES (TRANSACTIONS_SEQ.nextval, 103, TO_DATE('2024-12-02', 'YYYY-MM-DD'), 250.00, 'XYZ Store', 'Pending', 'Purchase of electronics');
