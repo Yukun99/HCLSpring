@@ -41,29 +41,16 @@ CREATE TABLE customers
         CHECK (REGEXP_LIKE(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'))
 );
 
-/*
- making a skeleton transactions table for now
- */
--- Create Account Table (just put here for reference)
--- CREATE TABLE accounts
--- (
---      account_id NUMBER PRIMARY KEY, -- Unique identifier for each account
---      account_name VARCHAR2(100),   -- Name of the account holder
---      account_type VARCHAR2(50),    -- Type of account (e.g., Savings, Checking)
---      created_date DATE DEFAULT SYSDATE -- Date when the account was created
--- );
-
--- Create Transaction Table
 CREATE TABLE transactions
 (
-     transaction_id NUMBER PRIMARY KEY, -- Unique identifier for each transaction
-     account_id NUMBER NOT NULL,        -- Links to Account table
-     transaction_date DATE NOT NULL,    -- Date of the transaction
-     amount NUMBER(10, 2) NOT NULL,     -- Transaction amount
-     recipient_sender VARCHAR2(100),   -- Recipient or sender of the transaction
-     status VARCHAR2(20),              -- Status of the transaction (e.g., initiated, completed, failed)
-     description VARCHAR2(255),        -- Optional description of the transaction
-     FOREIGN KEY (account_id) REFERENCES accounts(id) -- Foreign key constraint
+     transaction_id NUMBER PRIMARY KEY,
+     account_id NUMBER NOT NULL,
+     transaction_date DATE NOT NULL,
+     amount NUMBER(10, 2) NOT NULL,
+     recipient_sender VARCHAR2(100),
+     status VARCHAR2(20),
+     description VARCHAR2(255),
+     FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
 
 
@@ -98,7 +85,6 @@ VALUES (CUSTOMERS_SEQ.nextval, 'Charlie Green', 'charlieg', 'charlie.g@example.c
 /*
  init transactions
  */
--- Insert transactions into Transaction table
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)
 VALUES (TRANSACTIONS_SEQ.nextval, 101, TO_DATE('2024-11-01', 'YYYY-MM-DD'), 200.00, 'Amazon', 'Completed', 'Payment for order #1234');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description)

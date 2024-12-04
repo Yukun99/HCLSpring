@@ -1,41 +1,53 @@
 package com.spring.transaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
-@RequestMapping("/transaction")
-@ResponseBody
+@RequestMapping("/api/transactions")
 public class TransactionController {
 
-    private final TransactionRepository repository;
-
     @Autowired
-    public TransactionController(TransactionRepository repository) {
-        this.repository = repository;
+    private TransactionRepository transactionRepository;
+
+    @GetMapping("/by-account-id")
+    public ResponseEntity<List<Transaction>> findByAccountId(@RequestParam long accountId) {
+        List<Transaction> transactions = transactionRepository.findByAccountId(accountId);
+        return ResponseEntity.ok(transactions);
     }
 
-    // Endpoint to list all transactions
-    @GetMapping("/list")
-    public List<Transaction> list() {
-        return repository.findAll();
+    @GetMapping("/by-date")
+    public ResponseEntity<List<Transaction>> findByTransactionDate(@RequestParam String transactionDate) {
+        LocalDate date = LocalDate.parse(transactionDate);
+        List<Transaction> transactions = transactionRepository.findByTransactionDate(date);
+        return ResponseEntity.ok(transactions);
     }
 
-    // Endpoint to get a transaction by ID
-    @GetMapping("/get")
-    public Transaction getTransaction(@RequestParam long id) {
-        return repository.findById(id).orElse(null);
+    @GetMapping("/by-amount")
+    public ResponseEntity<List<Transaction>> findByAmount(@RequestParam double amount) {
+        List<Transaction> transactions = transactionRepository.findByAmount(amount);
+        return ResponseEntity.ok(transactions);
     }
 
-    // Endpoint to get all transactions for a specific account ID
-    @GetMapping("/byAccount")
-    public List<Transaction> getTransactionsByAccount(@RequestParam long accountId) {
-        return repository.findByAccountId(accountId);
+    @GetMapping("/by-recipient-sender")
+    public ResponseEntity<List<Transaction>> findByRecipientSender(@RequestParam String recipientSender) {
+        List<Transaction> transactions = transactionRepository.findByRecipientSender(recipientSender);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/by-status")
+    public ResponseEntity<List<Transaction>> findByStatus(@RequestParam String status) {
+        List<Transaction> transactions = transactionRepository.findByStatus(status);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/by-description")
+    public ResponseEntity<List<Transaction>> findByDescription(@RequestParam String keyword) {
+        List<Transaction> transactions = transactionRepository.findByDescriptionContaining(keyword);
+        return ResponseEntity.ok(transactions);
     }
 }
