@@ -34,16 +34,20 @@ public class Transaction {
     @Column(name = "description", length = 255)
     private String description;
 
+    @Column(name = "type", length = 255)
+    private String type;
+
     public Transaction() {
     }
 
-    public Transaction(Account account, LocalDate transactionDate, double amount, String recipientSender, String status, String description) {
+    public Transaction(Account account, LocalDate transactionDate, double amount, String recipientSender, String status, String description, String type) {
         this.account = account;
         this.transactionDate = transactionDate;
         this.amount = amount;
         this.recipientSender = recipientSender;
         this.status = status;
         this.description = description;
+        this.type = type;
     }
 
     public long getTransactionId() {
@@ -100,5 +104,13 @@ public class Transaction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

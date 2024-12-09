@@ -3,16 +3,23 @@ package com.spring.transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/transactions")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
 
     @Autowired
     private TransactionRepository transactionRepository;
+
+    @GetMapping("/list")
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.findAll();
+    }
 
     @GetMapping("/by-account-id")
     public ResponseEntity<List<Transaction>> findByAccountId(@RequestParam long accountId) {
@@ -50,4 +57,25 @@ public class TransactionController {
         List<Transaction> transactions = transactionRepository.findByDescriptionContaining(keyword);
         return ResponseEntity.ok(transactions);
     }
+
+    @GetMapping("/by-type")
+    public ResponseEntity<List<Transaction>> findByType(@RequestParam String keyword) {
+        List<Transaction> transactions = transactionRepository.findByTypeContaining(keyword);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<Transaction>> filterTransactions(
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String type
+    ) {
+        LocalDate start = (startDate != null) ? LocalDate.parse(startDate) : null;
+        LocalDate end = (endDate != null) ? LocalDate.parse(endDate) : null;
+
+        List<Transaction> transactions = transactionRepository.filterTransactions(start, end, status, type);
+        return ResponseEntity.ok(transactions);
+    }
+
 }
