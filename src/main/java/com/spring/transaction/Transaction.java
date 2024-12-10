@@ -1,112 +1,116 @@
 package com.spring.transaction;
 
 import com.spring.account.Account;
+
+import javax.persistence.*;
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "transactions")
 public class Transaction {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transactions_seq")
-  @SequenceGenerator(name = "transactions_seq", sequenceName = "TRANSACTIONS_SEQ", allocationSize = 1)
-  @Column(name = "transaction_id")
-  private long transactionId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transactions_seq")
+    @SequenceGenerator(name = "transactions_seq", sequenceName = "TRANSACTIONS_SEQ", allocationSize = 1)
+    @Column(name = "transaction_id")
+    private long transactionId;
 
-  @ManyToOne
-  @JoinColumn(name = "account_id", nullable = false)
-  private Account account;
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
 
-  @Column(name = "transaction_date", nullable = false)
-  private LocalDate transactionDate;
+    @Column(name = "transaction_date", nullable = false)
+    private LocalDate transactionDate;
 
-  @Column(name = "amount", columnDefinition = "BINARY_DOUBLE", nullable = false)
-  private double amount;
+    @Column(name = "amount", columnDefinition = "BINARY_DOUBLE", nullable = false)
+    private double amount;
 
-  @Column(name = "recipient_sender", nullable = false, length = 100)
-  private String recipientSender;
+    @Column(name = "recipient_sender", nullable = false, length = 100)
+    private String recipientSender;
 
-  @Column(name = "status", nullable = false, length = 50)
-  private String status;
+    @Column(name = "status", nullable = false, length = 50)
+    private String status;
 
-  @Column(name = "description")
-  private String description;
+    @Column(name = "description", length = 255)
+    private String description;
 
-  public Transaction() {
-  }
+    @Column(name = "type", length = 255)
+    private String type;
 
-  public Transaction(Account account, LocalDate transactionDate, double amount,
-      String recipientSender, String status, String description) {
-    this.account = account;
-    this.transactionDate = transactionDate;
-    this.amount = amount;
-    this.recipientSender = recipientSender;
-    this.status = status;
-    this.description = description;
-  }
+    public Transaction() {
+    }
 
-  public long getTransactionId() {
-    return transactionId;
-  }
+    public Transaction(Account account, LocalDate transactionDate, double amount, String recipientSender, String status, String description, String type) {
+        this.account = account;
+        this.transactionDate = transactionDate;
+        this.amount = amount;
+        this.recipientSender = recipientSender;
+        this.status = status;
+        this.description = description;
+        this.type = type;
+    }
 
-  public void setTransactionId(long transactionId) {
-    this.transactionId = transactionId;
-  }
+    public long getTransactionId() {
+        return transactionId;
+    }
 
-  public Account getAccount() {
-    return account;
-  }
+    public void setTransactionId(long transactionId) {
+        this.transactionId = transactionId;
+    }
 
-  public void setAccount(Account account) {
-    this.account = account;
-  }
+    public Account getAccount() {
+        return account;
+    }
 
-  public LocalDate getTransactionDate() {
-    return transactionDate;
-  }
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
-  public void setTransactionDate(LocalDate transactionDate) {
-    this.transactionDate = transactionDate;
-  }
+    public LocalDate getTransactionDate() {
+        return transactionDate;
+    }
 
-  public double getAmount() {
-    return amount;
-  }
+    public void setTransactionDate(LocalDate transactionDate) {
+        this.transactionDate = transactionDate;
+    }
 
-  public void setAmount(double amount) {
-    this.amount = amount;
-  }
+    public double getAmount() {
+        return amount;
+    }
 
-  public String getRecipientSender() {
-    return recipientSender;
-  }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
-  public void setRecipientSender(String recipientSender) {
-    this.recipientSender = recipientSender;
-  }
+    public String getRecipientSender() {
+        return recipientSender;
+    }
 
-  public String getStatus() {
-    return status;
-  }
+    public void setRecipientSender(String recipientSender) {
+        this.recipientSender = recipientSender;
+    }
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    public String getStatus() {
+        return status;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
