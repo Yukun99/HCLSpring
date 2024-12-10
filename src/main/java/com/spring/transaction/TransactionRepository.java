@@ -28,4 +28,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                                          @Param("end") LocalDate end,
                                          @Param("status") String status,
                                          @Param("type") String type);
+
+
 }

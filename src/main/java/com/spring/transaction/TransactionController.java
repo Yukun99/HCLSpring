@@ -78,4 +78,28 @@ public class TransactionController {
         return ResponseEntity.ok(transactions);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Transaction> updateTransaction(
+            @PathVariable Long id,
+            @RequestBody Transaction updatedTransaction) {
+        return transactionRepository.findById(id)
+                .map(existingTransaction -> {
+
+                    // Allow updates to editable fields only
+                    existingTransaction.setAmount(updatedTransaction.getAmount());
+                    existingTransaction.setRecipientSender(updatedTransaction.getRecipientSender());
+                    existingTransaction.setDescription(updatedTransaction.getDescription());
+                    existingTransaction.setType(updatedTransaction.getType());
+
+                    // Reset the status to 'Initiated'
+                    existingTransaction.setStatus("Initiated");
+
+                    // Save the updated transaction
+                    Transaction savedTransaction = transactionRepository.save(existingTransaction);
+                    return ResponseEntity.ok(savedTransaction);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
 }

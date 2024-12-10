@@ -87,7 +87,7 @@ VALUES (CUSTOMERS_SEQ.nextval, 'Charlie Green', 'charlieg', 'charlie.g@example.c
  init transactions
  */
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description, type)
-VALUES (TRANSACTIONS_SEQ.nextval, 101, TO_DATE('2024-11-01', 'YYYY-MM-DD'), 200.00, 'Amazon', 'Completed', 'Payment for order #1234', 'Shopping');
+VALUES (TRANSACTIONS_SEQ.nextval, 101, TO_DATE('2024-11-01', 'YYYY-MM-DD'), 200.00, 'Amazon', 'Processing', 'Payment for order #1234', 'Shopping');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description, type)
 VALUES (TRANSACTIONS_SEQ.nextval, 101, TO_DATE('2024-11-15', 'YYYY-MM-DD'), 500.00, 'Rent Payment', 'Completed', 'Monthly rent for November', 'Bills');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description, type)
@@ -99,4 +99,4 @@ VALUES (TRANSACTIONS_SEQ.nextval, 102, TO_DATE('2024-12-01', 'YYYY-MM-DD'), 1000
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description, type)
 VALUES (TRANSACTIONS_SEQ.nextval, 103, TO_DATE('2024-12-01', 'YYYY-MM-DD'), 150.00, 'Electricity Board', 'Completed', 'Utility bill payment', 'Bills');
 INSERT INTO transactions (transaction_id, account_id, transaction_date, amount, recipient_sender, status, description, type)
-VALUES (TRANSACTIONS_SEQ.nextval, 103, TO_DATE('2024-12-02', 'YYYY-MM-DD'), 250.00, 'XYZ Store', 'Pending', 'Purchase of electronics', 'Shopping');
+VALUES (TRANSACTIONS_SEQ.nextval, 103, TO_DATE('2024-12-02', 'YYYY-MM-DD'), 250.00, 'XYZ Store', 'Initiated', 'Purchase of electronics', 'Shopping');
