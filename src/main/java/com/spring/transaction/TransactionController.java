@@ -101,5 +101,28 @@ public class TransactionController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Transaction> cancelTransaction(
+            @PathVariable Long id,
+            @RequestBody Transaction updatedTransaction) {
+        return transactionRepository.findById(id)
+                .map(existingTransaction -> {
+
+                    // Allow updates to editable fields only
+                    existingTransaction.setAmount(updatedTransaction.getAmount());
+                    existingTransaction.setRecipientSender(updatedTransaction.getRecipientSender());
+                    existingTransaction.setDescription(updatedTransaction.getDescription());
+                    existingTransaction.setType(updatedTransaction.getType());
+
+                    // Reset the status to 'Initiated'
+                    existingTransaction.setStatus("Canceled");
+
+                    // Save the updated transaction
+                    Transaction savedTransaction = transactionRepository.save(existingTransaction);
+                    return ResponseEntity.ok(savedTransaction);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 
 }
