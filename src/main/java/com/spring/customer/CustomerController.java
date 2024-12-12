@@ -1,8 +1,10 @@
 package com.spring.customer;
 
+import com.spring.auth.LoginRequest;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,20 @@ public class CustomerController {
   @GetMapping("/get")
   public Customer getCustomer(@RequestParam long id) {
     return repository.findById(id).orElse(null);
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<Customer> login(@RequestBody LoginRequest loginRequest) {
+    Optional<Customer> customerOpt = repository.findByUsername(loginRequest.getUsername());
+
+    if (customerOpt.isPresent()) {
+      Customer customer = customerOpt.get();
+      if (customer.getPassword().equals(loginRequest.getPassword())) {
+        customer.setPassword(null);
+        return ResponseEntity.ok(customer);
+      }
+    }
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
   }
 
   @PostMapping("/update")
