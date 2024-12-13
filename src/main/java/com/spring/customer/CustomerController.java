@@ -36,6 +36,11 @@ public class CustomerController {
     return repository.findById(id).orElse(null);
   }
 
+  @GetMapping("/get/user")
+  public Customer getCustomer(@RequestParam String username) {
+    return repository.findByUsername(username).orElse(null);
+  }
+
   @PostMapping("/login")
   public ResponseEntity<Customer> login(@RequestBody LoginRequest loginRequest) {
     Optional<Customer> customerOpt = repository.findByUsername(loginRequest.getUsername());
