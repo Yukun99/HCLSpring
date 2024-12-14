@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static java.lang.Long.parseLong;
 
-@CrossOrigin(origins = "http://localhost:3002")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/payment")
 public class PaymentController {
