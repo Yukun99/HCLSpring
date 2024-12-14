@@ -41,6 +41,9 @@ public class PaymentController {
     public ResponseEntity<String> processUPIPayment(@RequestBody UPIPayment paymentRequest) {
 
         Account userAccount = accountRepository.findById(paymentRequest.getAccountId()).orElse(null);
+        Account recipient = accountRepository.findById(parseLong(paymentRequest.getRecipientUPI())).orElse(null);
+
+
         if (userAccount == null) {
             return ResponseEntity.badRequest().body("Invalid account ID");
         }
@@ -49,19 +52,16 @@ public class PaymentController {
             return ResponseEntity.badRequest().body("Insufficient balance");
         }
 
-        long receiveId = parseLong(paymentRequest.getRecipientUPI());
-
-        Account recipient = accountRepository.findById(receiveId).orElse(null);
-
         //Optional<Account> recipient = accountRepository.findById(parseLong(paymentRequest.getRecipientUPI()));
         if (recipient == null) {
             return ResponseEntity.badRequest().body("Invalid recipient ID");
         }
 
-
-
         userAccount.setBalance(userAccount.getBalance() - paymentRequest.getAmount());
+
+        recipient.setBalance(recipient.getBalance() + paymentRequest.getAmount());
         accountRepository.save(userAccount);
+        accountRepository.save(recipient);
 
         Transaction transaction = new Transaction();
         transaction.setAccount(userAccount);
