@@ -2,7 +2,7 @@
 pom.xml
 
 # Ignore application.properties
-**/application.properties
+**/src/resources/com.spring/application.properties
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
