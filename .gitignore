@@ -1,3 +1,9 @@
+# Ignore pom.xml
+pom.xml
+
+# Ignore application.properties
+**/src/resources/com.spring/application.properties
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

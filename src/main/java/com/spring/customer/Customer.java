@@ -41,11 +41,12 @@ public class Customer {
   public Customer() {
   }
 
-  public Customer(String name, String username, String email, String password) {
+  public Customer(String name, String username, String email, String password, Account account) {
     this.name = name;
     this.username = username;
     this.email = email;
     this.password = password;
+    this.account = account;
   }
 
   public void setId(long id) {
@@ -72,9 +73,7 @@ public class Customer {
     return id;
   }
 
-  public String getName() {
-    return name;
-  }
+  public String getName() { return name; }
 
   public String getUsername() {
     return username;
@@ -88,6 +87,11 @@ public class Customer {
     return password;
   }
 
+  public Account getAccount() { return account; }
+
+  public void setAccount(Account account) { this.account = account; }
+
+
   @Override
   public String toString() {
     return
@@ -98,4 +102,6 @@ public class Customer {
             + ", email=" + email
             + "]";
   }
+
+
 }
