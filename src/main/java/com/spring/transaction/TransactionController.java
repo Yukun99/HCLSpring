@@ -69,12 +69,13 @@ public class TransactionController {
             @RequestParam(required = false) String startDate,
             @RequestParam(required = false) String endDate,
             @RequestParam(required = false) String status,
-            @RequestParam(required = false) String type
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) Long account_id
     ) {
         LocalDate start = (startDate != null) ? LocalDate.parse(startDate) : null;
         LocalDate end = (endDate != null) ? LocalDate.parse(endDate) : null;
 
-        List<Transaction> transactions = transactionRepository.filterTransactions(start, end, status, type);
+        List<Transaction> transactions = transactionRepository.filterTransactions(start, end, status, type, account_id);
         return ResponseEntity.ok(transactions);
     }
 

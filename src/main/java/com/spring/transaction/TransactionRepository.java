@@ -19,15 +19,20 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findByDescriptionContaining(String keyword);
     List<Transaction> findByTypeContaining(String keyword);
 
-    @Query("SELECT t FROM Transaction t " +
-            "WHERE (:start IS NULL OR t.transactionDate >= :start) " +
-            "AND (:end IS NULL OR t.transactionDate <= :end) " +
-            "AND (:status IS NULL OR t.status = :status) " +
-            "AND (:type IS NULL OR t.type = :type)")
-    List<Transaction> filterTransactions(@Param("start") LocalDate start,
-                                         @Param("end") LocalDate end,
-                                         @Param("status") String status,
-                                         @Param("type") String type);
+    @Query("SELECT t FROM Transaction t WHERE " +
+            "(:start IS NULL OR t.transactionDate >= :start) AND " +
+            "(:end IS NULL OR t.transactionDate <= :end) AND " +
+            "(:status IS NULL OR t.status = :status) AND " +
+            "(:type IS NULL OR t.type = :type) AND " +
+            "(:account_id IS NULL OR t.account.id = :account_id)")
+    List<Transaction> filterTransactions(
+            @Param("start") LocalDate start,
+            @Param("end") LocalDate end,
+            @Param("status") String status,
+            @Param("type") String type,
+            @Param("account_id") Long accountId // New parameter
+    );
+
 
 
 }
