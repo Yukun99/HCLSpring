@@ -30,7 +30,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             @Param("end") LocalDate end,
             @Param("status") String status,
             @Param("type") String type,
-            @Param("account_id") Long accountId // New parameter
+            @Param("account_id") Long accountId
     );
 
 

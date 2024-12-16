@@ -17,9 +17,17 @@ public class TransactionController {
     private TransactionRepository transactionRepository;
 
     @GetMapping("/list")
-    public List<Transaction> getAllTransactions() {
-        return transactionRepository.findAll();
+    public ResponseEntity<List<Transaction>> getTransactions(
+            @RequestParam(required = false) Long account_id) {
+        List<Transaction> transactions;
+        if (account_id != null) {
+            transactions = transactionRepository.findByAccountId(account_id);
+        } else {
+            transactions = transactionRepository.findAll();
+        }
+        return ResponseEntity.ok(transactions);
     }
+
 
     @GetMapping("/by-account-id")
     public ResponseEntity<List<Transaction>> findByAccountId(@RequestParam long accountId) {
